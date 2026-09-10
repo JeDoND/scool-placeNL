@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>scool-placeNL</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <div class="logo-mark">S</div>
+
+        <div>
+            <h1>scool-placeNL</h1>
+            <p>Study • Create • Connect</p>
+        </div>
+    </div>
+
+    <button id="darkMode">🌙</button>
+
+</header>
+
+
+<nav>
+
+    <button id="tabAI" class="active">
+        🤖 School-AI
+    </button>
+
+    <button id="tabRooster">
+        📅 Rooster
+    </button>
+
+    <button id="tabAccounts">
+        🔗 Accounts
+    </button>
+
+</nav>
+
+
+<main>
+
+    <!-- ==================== -->
+    <!-- AI -->
+    <!-- ==================== -->
+
+    <section id="aiPagina">
+
+        <div class="page-title">
+
+            <span>🤖</span>
+
+            <div>
+                <h2>School-AI</h2>
+                <p>Leer slimmer. Denk creatiever.</p>
+            </div>
+
+        </div>
+
+
+        <section class="instellingen">
+
+            <label for="vak">Vak</label>
+
+            <select id="vak">
+
+                <option value="algemeen">Algemeen</option>
+                <option value="wiskunde">Wiskunde</option>
+                <option value="nederlands">Nederlands</option>
+                <option value="engels">Engels</option>
+                <option value="geschiedenis">Geschiedenis</option>
+                <option value="biologie">Biologie</option>
+                <option value="natuurkunde">Natuurkunde</option>
+                <option value="scheikunde">Scheikunde</option>
+
+            </select>
+
+
+            <label for="niveau">Niveau</label>
+
+            <select id="niveau">
+
+                <option value="makkelijk">Makkelijk</option>
+                <option value="gemiddeld" selected>
+                    Gemiddeld
+                </option>
+                <option value="moeilijk">Moeilijk</option>
+
+            </select>
+
+        </section>
+
+
+        <section id="chat">
+
+            <div class="bericht ai">
+
+                <strong>🤖 scool-placeNL AI</strong>
+
+                <p>
+                    Hallo! 👋
+                    Stel mij een vraag over school.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="input-area">
+
+            <textarea
+                id="vraag"
+                placeholder="Wat wil je leren?"
+            ></textarea>
+
+            <button id="verstuur">
+                Vraag stellen 🚀
+            </button>
+
+        </section>
+
+
+        <section class="onderkant">
+
+            <button id="wis">
+                🗑️ Chat wissen
+            </button>
+
+        </section>
+
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- ROOSTER -->
+    <!-- ==================== -->
+
+    <section id="roosterPagina" class="verborgen">
+
+        <div class="page-title">
+
+            <span>📅</span>
+
+            <div>
+
+                <h2>Mijn rooster</h2>
+
+                <p>
+                    Houd je schoolweek overzichtelijk.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="rooster-form">
+
+            <h3>Nieuwe les toevoegen</h3>
+
+
+            <label for="dag">Dag</label>
+
+            <select id="dag">
+
+                <option>Maandag</option>
+                <option>Dinsdag</option>
+                <option>Woensdag</option>
+                <option>Donderdag</option>
+                <option>Vrijdag</option>
+
+            </select>
+
+
+            <label for="begin">
+                Begintijd
+            </label>
+
+            <input type="time" id="begin">
+
+
+            <label for="einde">
+                Eindtijd
+            </label>
+
+            <input type="time" id="einde">
+
+
+            <label for="lesVak">
+                Vak
+            </label>
+
+            <input
+                type="text"
+                id="lesVak"
+                placeholder="Bijvoorbeeld Wiskunde"
+            >
+
+
+            <label for="docent">
+                Docent
+            </label>
+
+            <input
+                type="text"
+                id="docent"
+                placeholder="Bijvoorbeeld Jansen"
+            >
+
+
+            <label for="lokaal">
+                Lokaal
+            </label>
+
+            <input
+                type="text"
+                id="lokaal"
+                placeholder="Bijvoorbeeld B12"
+            >
+
+
+            <button id="lesToevoegen">
+                ➕ Les toevoegen
+            </button>
+
+        </div>
+
+
+        <div class="rooster-container">
+
+            <h3>Mijn lessen</h3>
+
+            <div id="rooster"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== -->
+    <!-- ACCOUNTS -->
+    <!-- ==================== -->
+
+    <section id="accountsPagina" class="verborgen">
+
+        <div class="page-title">
+
+            <span>🔗</span>
+
+            <div>
+
+                <h2>Mijn accounts</h2>
+
+                <p>
+                    Al je schooltools op één plek.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="accounts-grid">
+
+
+            <!-- MAGISTER -->
+
+            <a
+                class="account-card magister"
+                href="https://willibrord.magister.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="account-icon">
+                    🎓
+                </div>
+
+                <div class="account-info">
+
+                    <h3>Magister</h3>
+
+                    <p>
+                        Rooster, cijfers, agenda en schoolzaken.
+                    </p>
+
+                </div>
+
+                <span class="open-icon">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <!-- WORD -->
+
+            <a
+                class="account-card word"
+                href="https://www.office.com/launch/word"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="account-icon">
+                    📄
+                </div>
+
+                <div class="account-info">
+
+                    <h3>Word</h3>
+
+                    <p>
+                        Documenten maken en bewerken.
+                    </p>
+
+                </div>
+
+                <span class="open-icon">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <!-- OUTLOOK -->
+
+            <a
+                class="account-card outlook"
+                href="https://outlook.office.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="account-icon">
+                    📧
+                </div>
+
+                <div class="account-info">
+
+                    <h3>Outlook</h3>
+
+                    <p>
+                        E-mail, agenda en schoolberichten.
+                    </p>
+
+                </div>
+
+                <span class="open-icon">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <!-- CANVA -->
+
+            <a
+                class="account-card canva"
+                href="https://www.canva.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="account-icon">
+                    🎨
+                </div>
+
+                <div class="account-info">
+
+                    <h3>Canva</h3>
+
+                    <p>
+                        Presentaties, posters en ontwerpen.
+                    </p>
+
+                </div>
+
+                <span class="open-icon">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <!-- ONENOTE -->
+
+            <a
+                class="account-card onenote"
+                href="https://www.onenote.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="account-icon">
+                    📝
+                </div>
+
+                <div class="account-info">
+
+                    <h3>OneNote</h3>
+
+                    <p>
+                        Notities en digitale schoolboeken.
+                    </p>
+
+                </div>
+
+                <span class="open-icon">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <!-- LESSONUP -->
+
+            <a
+                class="account-card lessonup"
+                href="https://www.lessonup.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="account-icon">
+                    📚
+                </div>
+
+                <div class="account-info">
+
+                    <h3>LessonUp</h3>
+
+                    <p>
+                        Interactieve lessen en opdrachten.
+                    </p>
+
+                </div>
+
+                <span class="open-icon">
+                    ↗
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+        <div class="veiligheid">
+
+            🔐 <strong>Veiligheid</strong>
+
+            <p>
+                scool-placeNL slaat je wachtwoorden niet op.
+                Je logt rechtstreeks in bij de betreffende dienst.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>scool-placeNL</strong>
+
+    <p>
+        Study • Create • Connect
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

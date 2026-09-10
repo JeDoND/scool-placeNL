@@ -1,0 +1,733 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            #e8e1ff,
+            transparent 35%
+        ),
+        #f4f3f8;
+
+    color: #171717;
+
+    transition: 0.3s;
+}
+
+
+/* HEADER */
+
+header {
+
+    background: #171717;
+
+    color: white;
+
+    padding: 18px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.logo-mark {
+
+    width: 45px;
+    height: 45px;
+
+    background: white;
+
+    color: #171717;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+
+.logo h1 {
+
+    margin: 0;
+
+    font-size: 24px;
+}
+
+
+.logo p {
+
+    margin: 3px 0 0;
+
+    font-size: 12px;
+
+    opacity: 0.7;
+}
+
+
+#darkMode {
+
+    border: none;
+
+    background: white;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* NAVIGATIE */
+
+nav {
+
+    background: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+
+nav button {
+
+    border: none;
+
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    background: #f0eff4;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+nav button.active {
+
+    background: #171717;
+
+    color: white;
+}
+
+
+/* MAIN */
+
+main {
+
+    max-width: 900px;
+
+    margin: 30px auto;
+
+    padding: 15px;
+}
+
+
+/* TITELS */
+
+.page-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.page-title > span {
+
+    font-size: 40px;
+}
+
+
+.page-title h2 {
+
+    margin: 0;
+
+    font-size: 30px;
+}
+
+
+.page-title p {
+
+    margin: 5px 0 0;
+
+    color: #666;
+}
+
+
+/* ALGEMENE KAARTEN */
+
+.instellingen,
+#chat,
+.input-area,
+.rooster-form,
+.rooster-container {
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.06);
+}
+
+
+/* INSTELLINGEN */
+
+.instellingen {
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    display: grid;
+
+    gap: 9px;
+}
+
+
+select,
+input {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    border: 1px solid #d4d4d4;
+
+    font-size: 16px;
+
+    background: white;
+}
+
+
+/* CHAT */
+
+#chat {
+
+    padding: 20px;
+
+    min-height: 350px;
+
+    max-height: 600px;
+
+    overflow-y: auto;
+}
+
+
+.bericht {
+
+    padding: 15px;
+
+    margin-bottom: 15px;
+
+    border-radius: 16px;
+
+    max-width: 80%;
+}
+
+
+.bericht p {
+
+    white-space: pre-wrap;
+
+    line-height: 1.5;
+}
+
+
+.ai {
+
+    background: #eeeafa;
+
+    margin-right: auto;
+}
+
+
+.gebruiker {
+
+    background: #171717;
+
+    color: white;
+
+    margin-left: auto;
+}
+
+
+/* INPUT */
+
+.input-area {
+
+    padding: 15px;
+
+    margin-top: 20px;
+}
+
+
+textarea {
+
+    width: 100%;
+
+    height: 100px;
+
+    resize: none;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ccc;
+
+    font-size: 16px;
+}
+
+
+#verstuur,
+#lesToevoegen {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #171717;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+#verstuur:hover,
+#lesToevoegen:hover {
+
+    transform: translateY(-1px);
+
+    opacity: 0.9;
+}
+
+
+/* ROOSTER */
+
+.rooster-form,
+.rooster-container {
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.rooster-form {
+
+    display: grid;
+
+    gap: 10px;
+}
+
+
+.rooster-form h3,
+.rooster-container h3 {
+
+    margin-top: 0;
+}
+
+
+.les {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 14px;
+
+    background: #f0eff4;
+}
+
+
+.les-info strong {
+
+    font-size: 17px;
+}
+
+
+.les-info p {
+
+    margin: 5px 0;
+
+    color: #666;
+}
+
+
+.verwijder-les {
+
+    background: #d71920;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* ACCOUNTS */
+
+.accounts-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.account-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: white;
+
+    color: #171717;
+
+    text-decoration: none;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    border: 1px solid #e5e5e5;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 6px 25px rgba(0,0,0,0.05);
+}
+
+
+.account-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.1);
+}
+
+
+.account-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    background: #f0eff4;
+}
+
+
+.account-info {
+
+    flex: 1;
+}
+
+
+.account-info h3 {
+
+    margin: 0 0 5px;
+
+    font-size: 18px;
+}
+
+
+.account-info p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.4;
+}
+
+
+.open-icon {
+
+    font-size: 20px;
+
+    color: #777;
+}
+
+
+/* ACCOUNT ACCENTEN */
+
+.magister {
+    border-left: 5px solid #1769aa;
+}
+
+.word {
+    border-left: 5px solid #185abd;
+}
+
+.outlook {
+    border-left: 5px solid #0078d4;
+}
+
+.canva {
+    border-left: 5px solid #7d2ae8;
+}
+
+.onenote {
+    border-left: 5px solid #7719aa;
+}
+
+.lessonup {
+    border-left: 5px solid #e33b35;
+}
+
+
+/* VEILIGHEID */
+
+.veiligheid {
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background: #eeeafa;
+
+    color: #333;
+}
+
+
+.veiligheid p {
+
+    margin-bottom: 0;
+
+    line-height: 1.5;
+}
+
+
+/* FOOTER */
+
+footer {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777;
+}
+
+
+footer p {
+
+    margin-top: 5px;
+
+    font-size: 13px;
+}
+
+
+/* VERBORGEN */
+
+.verborgen {
+
+    display: none;
+}
+
+
+/* DONKERE MODUS */
+
+body.dark {
+
+    background: #111111;
+
+    color: white;
+}
+
+
+body.dark nav,
+body.dark .instellingen,
+body.dark #chat,
+body.dark .input-area,
+body.dark .rooster-form,
+body.dark .rooster-container,
+body.dark .account-card {
+
+    background: #202020;
+
+    color: white;
+
+    border-color: #333;
+}
+
+
+body.dark select,
+body.dark input,
+body.dark textarea {
+
+    background: #2c2c2c;
+
+    color: white;
+
+    border-color: #444;
+}
+
+
+body.dark .ai {
+
+    background: #343343;
+}
+
+
+body.dark .les {
+
+    background: #303030;
+}
+
+
+body.dark .account-info p,
+body.dark .les-info p {
+
+    color: #aaa;
+}
+
+
+body.dark .veiligheid {
+
+    background: #29263a;
+
+    color: white;
+}
+
+
+/* MOBIEL */
+
+@media (max-width: 650px) {
+
+    .accounts-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    nav {
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+    }
+
+
+    nav button {
+
+        white-space: nowrap;
+
+    }
+
+
+    .les {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+    }
+
+
+    .verwijder-les {
+
+        width: 100%;
+
+    }
+
+
+    .bericht {
+
+        max-width: 95%;
+
+    }
+
+}
