@@ -3,73 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>scool-placeNL</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-
-    <div class="logo">
-        <div class="logo-mark">S</div>
-
+    <div class="brand">
+        <div class="logo">S</div>
         <div>
             <h1>scool-placeNL</h1>
             <p>Study • Create • Connect</p>
         </div>
     </div>
 
-    <button id="darkMode">🌙</button>
-
+    <button id="themeButton" class="small-button">🎨 Thema</button>
 </header>
 
-
 <nav>
-
-    <button id="tabAI" class="active">
-        🤖 School-AI
-    </button>
-
-    <button id="tabRooster">
-        📅 Rooster
-    </button>
-
-    <button id="tabAccounts">
-        🔗 Accounts
-    </button>
-
+    <button class="nav-button active" data-page="ai">🤖 School-AI</button>
+    <button class="nav-button" data-page="rooster">📅 Rooster</button>
+    <button class="nav-button" data-page="toetsweken">📝 Toetsweken</button>
+    <button class="nav-button" data-page="accounts">🔗 Accounts</button>
+    <button class="nav-button" data-page="docent">👨‍🏫 Docent</button>
 </nav>
 
 
 <main>
 
-    <!-- ==================== -->
     <!-- AI -->
-    <!-- ==================== -->
+    <section id="ai" class="page active-page">
 
-    <section id="aiPagina">
-
-        <div class="page-title">
-
-            <span>🤖</span>
-
-            <div>
-                <h2>School-AI</h2>
-                <p>Leer slimmer. Denk creatiever.</p>
-            </div>
-
+        <div class="hero">
+            <h2>School-AI</h2>
+            <p>Stel een vraag over school, huiswerk of een vak.</p>
         </div>
 
-
-        <section class="instellingen">
-
-            <label for="vak">Vak</label>
-
-            <select id="vak">
-
+        <div class="controls">
+            <select id="subject">
                 <option value="algemeen">Algemeen</option>
                 <option value="wiskunde">Wiskunde</option>
                 <option value="nederlands">Nederlands</option>
@@ -78,389 +50,350 @@
                 <option value="biologie">Biologie</option>
                 <option value="natuurkunde">Natuurkunde</option>
                 <option value="scheikunde">Scheikunde</option>
-
             </select>
 
-
-            <label for="niveau">Niveau</label>
-
-            <select id="niveau">
-
+            <select id="level">
                 <option value="makkelijk">Makkelijk</option>
-                <option value="gemiddeld" selected>
-                    Gemiddeld
-                </option>
+                <option value="gemiddeld">Gemiddeld</option>
                 <option value="moeilijk">Moeilijk</option>
-
             </select>
+        </div>
 
-        </section>
-
-
-        <section id="chat">
-
-            <div class="bericht ai">
-
-                <strong>🤖 scool-placeNL AI</strong>
-
-                <p>
-                    Hallo! 👋
-                    Stel mij een vraag over school.
-                </p>
-
+        <div id="chat" class="chat">
+            <div class="message ai-message">
+                Hallo! 👋 Ik ben de School-AI. Waar kan ik je mee helpen?
             </div>
+        </div>
 
-        </section>
+        <div class="chat-input">
+            <textarea id="question" placeholder="Typ je vraag..."></textarea>
+            <button id="sendQuestion">Verstuur</button>
+        </div>
 
-
-        <section class="input-area">
-
-            <textarea
-                id="vraag"
-                placeholder="Wat wil je leren?"
-            ></textarea>
-
-            <button id="verstuur">
-                Vraag stellen 🚀
-            </button>
-
-        </section>
-
-
-        <section class="onderkant">
-
-            <button id="wis">
-                🗑️ Chat wissen
-            </button>
-
-        </section>
+        <button id="clearChat" class="secondary-button">
+            Chat wissen
+        </button>
 
     </section>
 
 
-    <!-- ==================== -->
     <!-- ROOSTER -->
-    <!-- ==================== -->
+    <section id="rooster" class="page">
 
-    <section id="roosterPagina" class="verborgen">
-
-        <div class="page-title">
-
-            <span>📅</span>
-
-            <div>
-
-                <h2>Mijn rooster</h2>
-
-                <p>
-                    Houd je schoolweek overzichtelijk.
-                </p>
-
-            </div>
-
+        <div class="hero">
+            <h2>📅 Mijn rooster</h2>
+            <p>Kies je klas om het rooster te bekijken.</p>
         </div>
 
+        <div class="class-selector">
+            <label>Mijn klas</label>
 
-        <div class="rooster-form">
-
-            <h3>Nieuwe les toevoegen</h3>
-
-
-            <label for="dag">Dag</label>
-
-            <select id="dag">
-
-                <option>Maandag</option>
-                <option>Dinsdag</option>
-                <option>Woensdag</option>
-                <option>Donderdag</option>
-                <option>Vrijdag</option>
-
+            <select id="studentClass">
+                <option value="">-- Kies je klas --</option>
+                <option value="1A">1A</option>
+                <option value="1B">1B</option>
+                <option value="1C">1C</option>
+                <option value="2A">2A</option>
+                <option value="2B">2B</option>
+                <option value="2C">2C</option>
+                <option value="3A">3A</option>
+                <option value="3B">3B</option>
+                <option value="3C">3C</option>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+                <option value="4C">4C</option>
+                <option value="5A">5A</option>
+                <option value="5B">5B</option>
+                <option value="6A">6A</option>
+                <option value="6B">6B</option>
             </select>
 
-
-            <label for="begin">
-                Begintijd
-            </label>
-
-            <input type="time" id="begin">
-
-
-            <label for="einde">
-                Eindtijd
-            </label>
-
-            <input type="time" id="einde">
-
-
-            <label for="lesVak">
-                Vak
-            </label>
-
-            <input
-                type="text"
-                id="lesVak"
-                placeholder="Bijvoorbeeld Wiskunde"
-            >
-
-
-            <label for="docent">
-                Docent
-            </label>
-
-            <input
-                type="text"
-                id="docent"
-                placeholder="Bijvoorbeeld Jansen"
-            >
-
-
-            <label for="lokaal">
-                Lokaal
-            </label>
-
-            <input
-                type="text"
-                id="lokaal"
-                placeholder="Bijvoorbeeld B12"
-            >
-
-
-            <button id="lesToevoegen">
-                ➕ Les toevoegen
-            </button>
-
+            <button id="saveStudentClass">Klas opslaan</button>
         </div>
 
+        <div id="studentClassInfo" class="info-box"></div>
 
-        <div class="rooster-container">
+        <div id="studentSchedule" class="schedule"></div>
 
-            <h3>Mijn lessen</h3>
+    </section>
 
-            <div id="rooster"></div>
+
+    <!-- TOETSWEKEN -->
+    <section id="toetsweken" class="page">
+
+        <div class="hero">
+            <h2>📝 Toetsweken</h2>
+            <p>Bekijk toetsen en leer wanneer je moet leren.</p>
+        </div>
+
+        <div class="test-filter">
+            <label>Mijn klas</label>
+
+            <select id="testClass">
+                <option value="">Alle klassen</option>
+                <option value="1A">1A</option>
+                <option value="1B">1B</option>
+                <option value="1C">1C</option>
+                <option value="2A">2A</option>
+                <option value="2B">2B</option>
+                <option value="2C">2C</option>
+                <option value="3A">3A</option>
+                <option value="3B">3B</option>
+                <option value="3C">3C</option>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+                <option value="4C">4C</option>
+                <option value="5A">5A</option>
+                <option value="5B">5B</option>
+                <option value="6A">6A</option>
+                <option value="6B">6B</option>
+            </select>
+        </div>
+
+        <div id="tests" class="tests"></div>
+
+    </section>
+
+
+    <!-- ACCOUNTS -->
+    <section id="accounts" class="page">
+
+        <div class="hero">
+            <h2>🔗 School-tools</h2>
+            <p>Open je belangrijkste schoolprogramma's.</p>
+        </div>
+
+        <div class="account-grid">
+
+            <a class="account-card" href="https://willibrord.magister.net/" target="_blank">
+                <span>📚</span>
+                <h3>Magister</h3>
+                <p>Cijfers, berichten en schoolinformatie.</p>
+            </a>
+
+            <a class="account-card" href="https://www.office.com/launch/word" target="_blank">
+                <span>📄</span>
+                <h3>Word</h3>
+                <p>Documenten maken en bewerken.</p>
+            </a>
+
+            <a class="account-card" href="https://outlook.office.com/" target="_blank">
+                <span>✉️</span>
+                <h3>Outlook</h3>
+                <p>Je schoolmail.</p>
+            </a>
+
+            <a class="account-card" href="https://www.canva.com/" target="_blank">
+                <span>🎨</span>
+                <h3>Canva</h3>
+                <p>Presentaties en ontwerpen.</p>
+            </a>
+
+            <a class="account-card" href="https://www.onenote.com/" target="_blank">
+                <span>📓</span>
+                <h3>OneNote</h3>
+                <p>Notities voor school.</p>
+            </a>
+
+            <a class="account-card" href="https://www.lessonup.com/" target="_blank">
+                <span>🎓</span>
+                <h3>LessonUp</h3>
+                <p>Interactieve lessen.</p>
+            </a>
 
         </div>
 
     </section>
 
 
-    <!-- ==================== -->
-    <!-- ACCOUNTS -->
-    <!-- ==================== -->
+    <!-- DOCENT -->
+    <section id="docent" class="page">
 
-    <section id="accountsPagina" class="verborgen">
+        <div class="hero">
+            <h2>👨‍🏫 Docentenportaal</h2>
+            <p>Beheer het rooster van verschillende klassen.</p>
+        </div>
 
-        <div class="page-title">
+        <div id="teacherLogin">
 
-            <span>🔗</span>
+            <div class="login-box">
 
-            <div>
-
-                <h2>Mijn accounts</h2>
+                <h3>Docent-login</h3>
 
                 <p>
-                    Al je schooltools op één plek.
+                    Log in om lessen en toetsen toe te voegen.
                 </p>
+
+                <input
+                    type="password"
+                    id="teacherCode"
+                    placeholder="Docentcode"
+                >
+
+                <button id="teacherLoginButton">
+                    Inloggen
+                </button>
+
+                <p id="loginMessage"></p>
 
             </div>
 
         </div>
 
 
-        <div class="accounts-grid">
+        <div id="teacherPanel" class="hidden">
 
-
-            <!-- MAGISTER -->
-
-            <a
-                class="account-card magister"
-                href="https://willibrord.magister.net/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="account-icon">
-                    🎓
+            <div class="teacher-header">
+                <div>
+                    <h3>Docentenpaneel</h3>
+                    <p>Welkom, docent 👋</p>
                 </div>
 
-                <div class="account-info">
-
-                    <h3>Magister</h3>
-
-                    <p>
-                        Rooster, cijfers, agenda en schoolzaken.
-                    </p>
-
-                </div>
-
-                <span class="open-icon">
-                    ↗
-                </span>
-
-            </a>
+                <button id="teacherLogout" class="secondary-button">
+                    Uitloggen
+                </button>
+            </div>
 
 
-            <!-- WORD -->
+            <!-- LES TOEVOEGEN -->
+            <div class="teacher-card">
 
-            <a
-                class="account-card word"
-                href="https://www.office.com/launch/word"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+                <h3>📅 Les toevoegen</h3>
 
-                <div class="account-icon">
-                    📄
-                </div>
+                <div class="form-grid">
 
-                <div class="account-info">
+                    <select id="teacherDay">
+                        <option value="Maandag">Maandag</option>
+                        <option value="Dinsdag">Dinsdag</option>
+                        <option value="Woensdag">Woensdag</option>
+                        <option value="Donderdag">Donderdag</option>
+                        <option value="Vrijdag">Vrijdag</option>
+                    </select>
 
-                    <h3>Word</h3>
+                    <input type="time" id="teacherStart">
 
-                    <p>
-                        Documenten maken en bewerken.
-                    </p>
+                    <input type="time" id="teacherEnd">
 
-                </div>
+                    <input
+                        type="text"
+                        id="teacherSubject"
+                        placeholder="Vak"
+                    >
 
-                <span class="open-icon">
-                    ↗
-                </span>
+                    <input
+                        type="text"
+                        id="teacherName"
+                        placeholder="Docent"
+                    >
 
-            </a>
+                    <input
+                        type="text"
+                        id="teacherRoom"
+                        placeholder="Lokaal"
+                    >
 
-
-            <!-- OUTLOOK -->
-
-            <a
-                class="account-card outlook"
-                href="https://outlook.office.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="account-icon">
-                    📧
-                </div>
-
-                <div class="account-info">
-
-                    <h3>Outlook</h3>
-
-                    <p>
-                        E-mail, agenda en schoolberichten.
-                    </p>
+                    <select id="teacherClass">
+                        <option value="1A">1A</option>
+                        <option value="1B">1B</option>
+                        <option value="1C">1C</option>
+                        <option value="2A">2A</option>
+                        <option value="2B">2B</option>
+                        <option value="2C">2C</option>
+                        <option value="3A">3A</option>
+                        <option value="3B">3B</option>
+                        <option value="3C">3C</option>
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                        <option value="4C">4C</option>
+                        <option value="5A">5A</option>
+                        <option value="5B">5B</option>
+                        <option value="6A">6A</option>
+                        <option value="6B">6B</option>
+                    </select>
 
                 </div>
 
-                <span class="open-icon">
-                    ↗
-                </span>
+                <button id="addTeacherLesson">
+                    ➕ Les toevoegen
+                </button>
 
-            </a>
-
-
-            <!-- CANVA -->
-
-            <a
-                class="account-card canva"
-                href="https://www.canva.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="account-icon">
-                    🎨
-                </div>
-
-                <div class="account-info">
-
-                    <h3>Canva</h3>
-
-                    <p>
-                        Presentaties, posters en ontwerpen.
-                    </p>
-
-                </div>
-
-                <span class="open-icon">
-                    ↗
-                </span>
-
-            </a>
+            </div>
 
 
-            <!-- ONENOTE -->
+            <!-- TOETS TOEVOEGEN -->
+            <div class="teacher-card">
 
-            <a
-                class="account-card onenote"
-                href="https://www.onenote.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+                <h3>📝 Toets toevoegen</h3>
 
-                <div class="account-icon">
-                    📝
-                </div>
+                <div class="form-grid">
 
-                <div class="account-info">
+                    <select id="testDay">
+                        <option value="Maandag">Maandag</option>
+                        <option value="Dinsdag">Dinsdag</option>
+                        <option value="Woensdag">Woensdag</option>
+                        <option value="Donderdag">Donderdag</option>
+                        <option value="Vrijdag">Vrijdag</option>
+                    </select>
 
-                    <h3>OneNote</h3>
+                    <input
+                        type="date"
+                        id="testDate"
+                    >
 
-                    <p>
-                        Notities en digitale schoolboeken.
-                    </p>
+                    <input
+                        type="text"
+                        id="testSubject"
+                        placeholder="Vak"
+                    >
 
-                </div>
+                    <input
+                        type="text"
+                        id="testDescription"
+                        placeholder="Onderwerp / hoofdstukken"
+                    >
 
-                <span class="open-icon">
-                    ↗
-                </span>
+                    <input
+                        type="text"
+                        id="testTime"
+                        placeholder="Bijv. 10:00"
+                    >
 
-            </a>
-
-
-            <!-- LESSONUP -->
-
-            <a
-                class="account-card lessonup"
-                href="https://www.lessonup.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="account-icon">
-                    📚
-                </div>
-
-                <div class="account-info">
-
-                    <h3>LessonUp</h3>
-
-                    <p>
-                        Interactieve lessen en opdrachten.
-                    </p>
+                    <select id="testTeacherClass">
+                        <option value="1A">1A</option>
+                        <option value="1B">1B</option>
+                        <option value="1C">1C</option>
+                        <option value="2A">2A</option>
+                        <option value="2B">2B</option>
+                        <option value="2C">2C</option>
+                        <option value="3A">3A</option>
+                        <option value="3B">3B</option>
+                        <option value="3C">3C</option>
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                        <option value="4C">4C</option>
+                        <option value="5A">5A</option>
+                        <option value="5B">5B</option>
+                        <option value="6A">6A</option>
+                        <option value="6B">6B</option>
+                    </select>
 
                 </div>
 
-                <span class="open-icon">
-                    ↗
-                </span>
+                <button id="addTest">
+                    ➕ Toets toevoegen
+                </button>
 
-            </a>
-
-
-        </div>
+            </div>
 
 
-        <div class="veiligheid">
+            <!-- BESTAAND ROOSTER -->
+            <div class="teacher-card">
 
-            🔐 <strong>Veiligheid</strong>
+                <h3>🗑️ Lessen beheren</h3>
 
-            <p>
-                scool-placeNL slaat je wachtwoorden niet op.
-                Je logt rechtstreeks in bij de betreffende dienst.
-            </p>
+                <div id="teacherSchedule"></div>
+
+            </div>
 
         </div>
 
@@ -469,15 +402,64 @@
 </main>
 
 
-<footer>
+<!-- THEMA POPUP -->
+<div id="themeModal" class="modal hidden">
 
-    <strong>scool-placeNL</strong>
+    <div class="modal-content">
 
-    <p>
-        Study • Create • Connect
-    </p>
+        <button id="closeTheme" class="close-button">×</button>
 
-</footer>
+        <h2>🎨 Kies je thema</h2>
+
+        <p>Pas scool-placeNL aan naar jouw stijl.</p>
+
+        <div class="theme-grid">
+
+            <button class="theme-option" data-theme="default">
+                ⚪
+                <strong>Classic</strong>
+            </button>
+
+            <button class="theme-option" data-theme="dark">
+                ⚫
+                <strong>Dark</strong>
+            </button>
+
+            <button class="theme-option" data-theme="purple">
+                🟣
+                <strong>Purple</strong>
+            </button>
+
+            <button class="theme-option" data-theme="blue">
+                🔵
+                <strong>Ocean</strong>
+            </button>
+
+            <button class="theme-option" data-theme="green">
+                🟢
+                <strong>Nature</strong>
+            </button>
+
+            <button class="theme-option" data-theme="pink">
+                🩷
+                <strong>Pink</strong>
+            </button>
+
+            <button class="theme-option" data-theme="orange">
+                🟠
+                <strong>Sunset</strong>
+            </button>
+
+            <button class="theme-option" data-theme="neon">
+                🌈
+                <strong>Neon</strong>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script src="script.js"></script>
