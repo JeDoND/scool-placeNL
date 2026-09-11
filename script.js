@@ -1,677 +1,823 @@
-const vraag = document.getElementById("vraag");
-const verstuur = document.getElementById("verstuur");
-const chat = document.getElementById("chat");
-const wis = document.getElementById("wis");
+/* =========================
+   DATA
+========================= */
 
-const darkMode = document.getElementById("darkMode");
+let lessons = JSON.parse(
+    localStorage.getItem("schoolLessons")
+) || [];
 
-const vak = document.getElementById("vak");
-const niveau = document.getElementById("niveau");
+let tests = JSON.parse(
+    localStorage.getItem("schoolTests")
+) || [];
 
+let selectedClass =
+    localStorage.getItem("studentClass") || "";
 
-// ==============================
-// PAGINA'S
-// ==============================
+let currentTheme =
+    localStorage.getItem("schoolTheme") || "default";
 
-const tabAI = document.getElementById("tabAI");
-const tabRooster = document.getElementById("tabRooster");
-const tabAccounts = document.getElementById("tabAccounts");
 
-const aiPagina = document.getElementById("aiPagina");
-const roosterPagina = document.getElementById("roosterPagina");
-const accountsPagina = document.getElementById("accountsPagina");
+/* =========================
+   NAVIGATIE
+========================= */
 
+const navButtons = document.querySelectorAll(".nav-button");
+const pages = document.querySelectorAll(".page");
 
-function openPagina(pagina) {
+navButtons.forEach(button => {
 
-    aiPagina.classList.add("verborgen");
-    roosterPagina.classList.add("verborgen");
-    accountsPagina.classList.add("verborgen");
+    button.addEventListener("click", () => {
 
-    tabAI.classList.remove("active");
-    tabRooster.classList.remove("active");
-    tabAccounts.classList.remove("active");
+        const pageName = button.dataset.page;
 
-
-    if (pagina === "ai") {
-
-        aiPagina.classList.remove("verborgen");
-
-        tabAI.classList.add("active");
-
-    }
-
-
-    if (pagina === "rooster") {
-
-        roosterPagina.classList.remove("verborgen");
-
-        tabRooster.classList.add("active");
-
-        toonRooster();
-
-    }
-
-
-    if (pagina === "accounts") {
-
-        accountsPagina.classList.remove("verborgen");
-
-        tabAccounts.classList.add("active");
-
-    }
-
-}
-
-
-tabAI.addEventListener("click", function () {
-
-    openPagina("ai");
-
-});
-
-
-tabRooster.addEventListener("click", function () {
-
-    openPagina("rooster");
-
-});
-
-
-tabAccounts.addEventListener("click", function () {
-
-    openPagina("accounts");
-
-});
-
-
-// ==============================
-// SCHOOL-AI
-// ==============================
-
-function voegBerichtToe(tekst, type) {
-
-    const bericht = document.createElement("div");
-
-    bericht.className = "bericht " + type;
-
-
-    const titel = document.createElement("strong");
-
-    const inhoud = document.createElement("p");
-
-
-    if (type === "gebruiker") {
-
-        titel.innerText = "👤 Jij";
-
-    } else {
-
-        titel.innerText = "🤖 scool-placeNL AI";
-
-    }
-
-
-    inhoud.innerText = tekst;
-
-
-    bericht.appendChild(titel);
-    bericht.appendChild(inhoud);
-
-
-    chat.appendChild(bericht);
-
-
-    chat.scrollTop = chat.scrollHeight;
-
-}
-
-
-function geefAntwoord(vraagTekst) {
-
-    const tekst = vraagTekst.toLowerCase();
-
-    const gekozenVak = vak.value;
-
-    const gekozenNiveau = niveau.value;
-
-
-    if (tekst.includes("fotosynthese")) {
-
-        return `Fotosynthese is het proces waarbij planten lichtenergie gebruiken om voedsel te maken.
-
-🌞 Licht
-💧 Water
-🌫️ Koolstofdioxide
-
-Daaruit maakt de plant glucose en zuurstof.
-
-Kort:
-
-licht + water + koolstofdioxide
-→ glucose + zuurstof`;
-
-    }
-
-
-    if (
-        tekst.includes("zwaartekracht") ||
-        tekst.includes("gravitatie")
-    ) {
-
-        return `Zwaartekracht is de kracht waarmee objecten met massa elkaar aantrekken.
-
-Op aarde zorgt zwaartekracht ervoor dat voorwerpen naar de grond vallen.
-
-Voorbeeld:
-
-Laat je een bal los, dan valt hij naar beneden door de zwaartekracht.`;
-
-    }
-
-
-    if (gekozenVak === "wiskunde") {
-
-        if (tekst.includes("2+2")) {
-
-            return "2 + 2 = 4 ✅";
-
-        }
-
-
-        return `Je hebt een wiskundevraag gesteld.
-
-Niveau: ${gekozenNiveau}
-
-Dit is nog de demo-versie van de School-AI.`;
-
-    }
-
-
-    return `Je vroeg:
-
-"${vraagTekst}"
-
-Vak: ${gekozenVak}
-Niveau: ${gekozenNiveau}
-
-Dit is de huidige demo van scool-placeNL. 🤖`;
-
-}
-
-
-function stelVraag() {
-
-    const tekst = vraag.value.trim();
-
-
-    if (tekst === "") {
-
-        return;
-
-    }
-
-
-    voegBerichtToe(tekst, "gebruiker");
-
-
-    vraag.value = "";
-
-
-    verstuur.disabled = true;
-
-    verstuur.innerText =
-        "School-AI denkt...";
-
-
-    setTimeout(function () {
-
-        const antwoord =
-            geefAntwoord(tekst);
-
-
-        voegBerichtToe(
-            antwoord,
-            "ai"
+        navButtons.forEach(btn =>
+            btn.classList.remove("active")
         );
 
-
-        verstuur.disabled = false;
-
-        verstuur.innerText =
-            "Vraag stellen 🚀";
-
-    }, 700);
-
-}
-
-
-verstuur.addEventListener(
-    "click",
-    stelVraag
-);
-
-
-vraag.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Enter" &&
-            !event.shiftKey
-        ) {
-
-            event.preventDefault();
-
-            stelVraag();
-
-        }
-
-    }
-);
-
-
-wis.addEventListener(
-    "click",
-    function() {
-
-        chat.innerHTML = `
-
-            <div class="bericht ai">
-
-                <strong>
-                    🤖 scool-placeNL AI
-                </strong>
-
-                <p>
-                    De chat is gewist.
-                    Stel een nieuwe vraag! 😊
-                </p>
-
-            </div>
-
-        `;
-
-    }
-);
-
-
-// ==============================
-// DONKERE MODUS
-// ==============================
-
-darkMode.addEventListener(
-    "click",
-    function() {
-
-        document.body.classList.toggle(
-            "dark"
+        pages.forEach(page =>
+            page.classList.remove("active-page")
         );
 
+        button.classList.add("active");
 
-        if (
-            document.body.classList.contains(
-                "dark"
-            )
-        ) {
+        document
+            .getElementById(pageName)
+            .classList.add("active-page");
 
-            darkMode.innerText = "☀️";
-
-        } else {
-
-            darkMode.innerText = "🌙";
-
+        if (pageName === "rooster") {
+            showStudentSchedule();
         }
 
-    }
-);
+        if (pageName === "toetsweken") {
+            showTests();
+        }
+
+        if (pageName === "docent") {
+            showTeacherSchedule();
+        }
+    });
+
+});
 
 
-// ==============================
-// ROOSTER
-// ==============================
+/* =========================
+   THEMA
+========================= */
 
-const lesToevoegen =
-    document.getElementById(
-        "lesToevoegen"
-    );
+document.body.dataset.theme = currentTheme;
 
+const themeButton =
+    document.getElementById("themeButton");
 
-const dag =
-    document.getElementById("dag");
+const themeModal =
+    document.getElementById("themeModal");
 
-const begin =
-    document.getElementById("begin");
+const closeTheme =
+    document.getElementById("closeTheme");
 
-const einde =
-    document.getElementById("einde");
+themeButton.addEventListener("click", () => {
+    themeModal.classList.remove("hidden");
+});
 
-const lesVak =
-    document.getElementById("lesVak");
+closeTheme.addEventListener("click", () => {
+    themeModal.classList.add("hidden");
+});
 
-const docent =
-    document.getElementById("docent");
+document.querySelectorAll(".theme-option")
+    .forEach(button => {
 
-const lokaal =
-    document.getElementById("lokaal");
+        button.addEventListener("click", () => {
 
-const rooster =
-    document.getElementById("rooster");
+            const theme =
+                button.dataset.theme;
 
+            currentTheme = theme;
 
-let lessen =
-    JSON.parse(
-        localStorage.getItem(
-            "schoolAI_rooster"
-        )
-    ) || [];
+            document.body.dataset.theme = theme;
 
-
-// LES TOEVOEGEN
-
-lesToevoegen.addEventListener(
-    "click",
-    function() {
-
-
-        if (
-            begin.value === "" ||
-            einde.value === "" ||
-            lesVak.value.trim() === ""
-        ) {
-
-            alert(
-                "Vul minimaal het vak, de begintijd en de eindtijd in."
+            localStorage.setItem(
+                "schoolTheme",
+                theme
             );
 
-            return;
+            themeModal.classList.add("hidden");
+        });
 
-        }
-
-
-        const nieuweLes = {
-
-            id: Date.now(),
-
-            dag: dag.value,
-
-            begin: begin.value,
-
-            einde: einde.value,
-
-            vak: lesVak.value.trim(),
-
-            docent: docent.value.trim(),
-
-            lokaal: lokaal.value.trim()
-
-        };
+    });
 
 
-        lessen.push(nieuweLes);
+/* =========================
+   SCHOOL AI
+========================= */
+
+const sendQuestion =
+    document.getElementById("sendQuestion");
+
+const question =
+    document.getElementById("question");
+
+const chat =
+    document.getElementById("chat");
+
+const subject =
+    document.getElementById("subject");
+
+const level =
+    document.getElementById("level");
+
+sendQuestion.addEventListener("click", askAI);
+
+question.addEventListener("keydown", event => {
+
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        askAI();
+    }
+
+});
 
 
-        localStorage.setItem(
-            "schoolAI_rooster",
-            JSON.stringify(lessen)
+function askAI() {
+
+    const text =
+        question.value.trim();
+
+    if (!text) return;
+
+    addMessage(
+        text,
+        "user-message"
+    );
+
+    question.value = "";
+
+    setTimeout(() => {
+
+        let answer =
+            generateDemoAnswer(text);
+
+        addMessage(
+            answer,
+            "ai-message"
         );
 
+    }, 500);
 
-        begin.value = "";
-        einde.value = "";
-        lesVak.value = "";
-        docent.value = "";
-        lokaal.value = "";
+}
 
 
-        toonRooster();
+function addMessage(text, className) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message " + className;
+
+    message.textContent = text;
+
+    chat.appendChild(message);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+}
+
+
+function generateDemoAnswer(text) {
+
+    const lower =
+        text.toLowerCase();
+
+    if (
+        lower.includes("fotosynthese") ||
+        lower.includes("fotosynthese")
+    ) {
+
+        return "Fotosynthese is het proces waarbij planten met behulp van licht, water en koolstofdioxide glucose en zuurstof maken.";
 
     }
-);
+
+    if (
+        lower.includes("zwaartekracht")
+    ) {
+
+        return "Zwaartekracht is de kracht waarmee massa's elkaar aantrekken. Op aarde zorgt zwaartekracht ervoor dat voorwerpen naar de grond vallen.";
+
+    }
+
+    if (
+        lower.includes("2+2") ||
+        lower.includes("2 + 2")
+    ) {
+
+        return "2 + 2 = 4 😊";
+
+    }
+
+    return `Je hebt een vraag gesteld over ${subject.value} op niveau ${level.value}. Dit is nog de demo-versie van de School-AI.`;
+
+}
 
 
-// ROOSTER TONEN
+document
+    .getElementById("clearChat")
+    .addEventListener("click", () => {
 
-function toonRooster() {
+        chat.innerHTML = `
+            <div class="message ai-message">
+                Chat gewist. Waar kan ik je mee helpen?
+            </div>
+        `;
 
-    rooster.innerHTML = "";
+    });
 
 
-    if (lessen.length === 0) {
+/* =========================
+   LEERLING KLAS
+========================= */
 
-        rooster.innerHTML = `
+const studentClass =
+    document.getElementById("studentClass");
 
-            <p>
-                Je hebt nog geen lessen toegevoegd.
-            </p>
+studentClass.value =
+    selectedClass;
 
+
+document
+    .getElementById("saveStudentClass")
+    .addEventListener("click", () => {
+
+        selectedClass =
+            studentClass.value;
+
+        localStorage.setItem(
+            "studentClass",
+            selectedClass
+        );
+
+        showStudentSchedule();
+
+        alert(
+            "Je klas is opgeslagen als " +
+            selectedClass
+        );
+
+    });
+
+
+/* =========================
+   LEERLING ROOSTER
+========================= */
+
+function showStudentSchedule() {
+
+    const container =
+        document.getElementById(
+            "studentSchedule"
+        );
+
+    const info =
+        document.getElementById(
+            "studentClassInfo"
+        );
+
+    container.innerHTML = "";
+
+    if (!selectedClass) {
+
+        info.textContent =
+            "Kies hierboven eerst je klas.";
+
+        return;
+    }
+
+    info.textContent =
+        "Rooster van klas " +
+        selectedClass;
+
+    const classLessons =
+        lessons.filter(
+            lesson =>
+                lesson.className === selectedClass
+        );
+
+    if (classLessons.length === 0) {
+
+        container.innerHTML = `
+            <div class="info-box">
+                Er zijn nog geen lessen ingevoerd
+                voor klas ${selectedClass}.
+            </div>
         `;
 
         return;
-
     }
 
-
-    const dagen = [
-
+    const days = [
         "Maandag",
         "Dinsdag",
         "Woensdag",
         "Donderdag",
         "Vrijdag"
-
     ];
 
+    days.forEach(day => {
 
-    dagen.forEach(
-        function(dagNaam) {
-
-
-            const lessenVanDag =
-                lessen
-
-                .filter(
-                    function(les) {
-
-                        return (
-                            les.dag === dagNaam
-                        );
-
-                    }
-                )
-
-                .sort(
-                    function(a, b) {
-
-                        return a.begin.localeCompare(
-                            b.begin
-                        );
-
-                    }
-                );
-
-
-            if (
-                lessenVanDag.length === 0
-            ) {
-
-                return;
-
-            }
-
-
-            const dagTitel =
-                document.createElement(
-                    "h3"
-                );
-
-
-            dagTitel.innerText =
-                "📅 " + dagNaam;
-
-
-            rooster.appendChild(
-                dagTitel
+        const dayLessons =
+            classLessons.filter(
+                lesson =>
+                    lesson.day === day
             );
 
-
-            lessenVanDag.forEach(
-                function(les) {
-
-
-                    const element =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    element.className =
-                        "les";
-
-
-                    const informatie =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    informatie.className =
-                        "les-info";
-
-
-                    const titel =
-                        document.createElement(
-                            "strong"
-                        );
-
-
-                    titel.innerText =
-                        `${les.begin} - ${les.einde} | ${les.vak}`;
-
-
-                    const details =
-                        document.createElement(
-                            "p"
-                        );
-
-
-                    let tekst = "";
-
-
-                    if (
-                        les.docent !== ""
-                    ) {
-
-                        tekst +=
-                            "👨‍🏫 " +
-                            les.docent;
-
-                    }
-
-
-                    if (
-                        les.lokaal !== ""
-                    ) {
-
-                        if (
-                            tekst !== ""
-                        ) {
-
-                            tekst +=
-                                " • ";
-
-                        }
-
-
-                        tekst +=
-                            "🚪 " +
-                            les.lokaal;
-
-                    }
-
-
-                    details.innerText =
-                        tekst;
-
-
-                    informatie.appendChild(
-                        titel
-                    );
-
-                    informatie.appendChild(
-                        details
-                    );
-
-
-                    const verwijderen =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    verwijderen.className =
-                        "verwijder-les";
-
-
-                    verwijderen.innerText =
-                        "🗑️ Verwijderen";
-
-
-                    verwijderen.addEventListener(
-                        "click",
-                        function() {
-
-                            verwijderLes(
-                                les.id
-                            );
-
-                        }
-                    );
-
-
-                    element.appendChild(
-                        informatie
-                    );
-
-
-                    element.appendChild(
-                        verwijderen
-                    );
-
-
-                    rooster.appendChild(
-                        element
-                    );
-
-                }
+        dayLessons
+            .sort((a, b) =>
+                a.start.localeCompare(b.start)
             );
 
-        }
-    );
+        dayLessons.forEach(lesson => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "lesson";
+
+            div.innerHTML = `
+                <h3>${lesson.subject}</h3>
+                <p>📅 ${lesson.day}</p>
+                <p>🕐 ${lesson.start} - ${lesson.end}</p>
+                <p>👨‍🏫 ${lesson.teacher}</p>
+                <p>🚪 Lokaal ${lesson.room}</p>
+                <p>🏫 Klas ${lesson.className}</p>
+            `;
+
+            container.appendChild(div);
+
+        });
+
+    });
 
 }
 
 
-// LES VERWIJDEREN
+/* =========================
+   DOCENT LOGIN
+========================= */
 
-function verwijderLes(id) {
+const teacherLoginButton =
+    document.getElementById(
+        "teacherLoginButton"
+    );
 
-    lessen =
-        lessen.filter(
-            function(les) {
+const teacherCode =
+    document.getElementById(
+        "teacherCode"
+    );
 
-                return les.id !== id;
+const loginMessage =
+    document.getElementById(
+        "loginMessage"
+    );
 
-            }
+const teacherLogin =
+    document.getElementById(
+        "teacherLogin"
+    );
+
+const teacherPanel =
+    document.getElementById(
+        "teacherPanel"
+    );
+
+
+teacherLoginButton.addEventListener(
+    "click",
+    () => {
+
+        if (teacherCode.value === "12345") {
+
+            teacherLogin.classList.add(
+                "hidden"
+            );
+
+            teacherPanel.classList.remove(
+                "hidden"
+            );
+
+            loginMessage.textContent = "";
+
+            showTeacherSchedule();
+
+        } else {
+
+            loginMessage.textContent =
+                "❌ Onjuiste docentcode.";
+
+        }
+
+    }
+);
+
+
+document
+    .getElementById("teacherLogout")
+    .addEventListener("click", () => {
+
+        teacherPanel.classList.add(
+            "hidden"
+        );
+
+        teacherLogin.classList.remove(
+            "hidden"
+        );
+
+        teacherCode.value = "";
+
+    });
+
+
+/* =========================
+   DOCENT LES TOEVOEGEN
+========================= */
+
+document
+    .getElementById("addTeacherLesson")
+    .addEventListener("click", () => {
+
+        const lesson = {
+
+            id: Date.now(),
+
+            day:
+                document.getElementById(
+                    "teacherDay"
+                ).value,
+
+            start:
+                document.getElementById(
+                    "teacherStart"
+                ).value,
+
+            end:
+                document.getElementById(
+                    "teacherEnd"
+                ).value,
+
+            subject:
+                document.getElementById(
+                    "teacherSubject"
+                ).value,
+
+            teacher:
+                document.getElementById(
+                    "teacherName"
+                ).value,
+
+            room:
+                document.getElementById(
+                    "teacherRoom"
+                ).value,
+
+            className:
+                document.getElementById(
+                    "teacherClass"
+                ).value
+        };
+
+
+        if (
+            !lesson.start ||
+            !lesson.end ||
+            !lesson.subject ||
+            !lesson.teacher ||
+            !lesson.room
+        ) {
+
+            alert(
+                "Vul alle gegevens van de les in."
+            );
+
+            return;
+        }
+
+
+        lessons.push(lesson);
+
+        localStorage.setItem(
+            "schoolLessons",
+            JSON.stringify(lessons)
         );
 
 
+        alert(
+            `Les toegevoegd aan klas ${lesson.className}!`
+        );
+
+
+        document.getElementById(
+            "teacherSubject"
+        ).value = "";
+
+        document.getElementById(
+            "teacherName"
+        ).value = "";
+
+        document.getElementById(
+            "teacherRoom"
+        ).value = "";
+
+
+        showTeacherSchedule();
+
+    });
+
+
+/* =========================
+   DOCENT ROOSTER BEHEREN
+========================= */
+
+function showTeacherSchedule() {
+
+    const container =
+        document.getElementById(
+            "teacherSchedule"
+        );
+
+    container.innerHTML = "";
+
+    if (lessons.length === 0) {
+
+        container.innerHTML =
+            "<p>Er zijn nog geen lessen.</p>";
+
+        return;
+    }
+
+
+    lessons
+        .sort((a, b) =>
+            a.start.localeCompare(b.start)
+        )
+        .forEach(lesson => {
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "teacher-row";
+
+            row.innerHTML = `
+                <div>
+                    <strong>
+                        ${lesson.subject}
+                    </strong>
+
+                    <br>
+
+                    ${lesson.day}
+                    • ${lesson.start}-${lesson.end}
+
+                    <br>
+
+                    Klas ${lesson.className}
+                    • lokaal ${lesson.room}
+                </div>
+
+                <button
+                    onclick="deleteLesson(${lesson.id})"
+                >
+                    🗑️
+                </button>
+            `;
+
+            container.appendChild(row);
+
+        });
+
+}
+
+
+function deleteLesson(id) {
+
+    lessons =
+        lessons.filter(
+            lesson =>
+                lesson.id !== id
+        );
+
     localStorage.setItem(
-        "schoolAI_rooster",
-        JSON.stringify(lessen)
+        "schoolLessons",
+        JSON.stringify(lessons)
+    );
+
+    showTeacherSchedule();
+    showStudentSchedule();
+
+}
+
+
+/* =========================
+   TOETS TOEVOEGEN
+========================= */
+
+document
+    .getElementById("addTest")
+    .addEventListener("click", () => {
+
+        const test = {
+
+            id: Date.now(),
+
+            day:
+                document.getElementById(
+                    "testDay"
+                ).value,
+
+            date:
+                document.getElementById(
+                    "testDate"
+                ).value,
+
+            subject:
+                document.getElementById(
+                    "testSubject"
+                ).value,
+
+            description:
+                document.getElementById(
+                    "testDescription"
+                ).value,
+
+            time:
+                document.getElementById(
+                    "testTime"
+                ).value,
+
+            className:
+                document.getElementById(
+                    "testTeacherClass"
+                ).value
+
+        };
+
+
+        if (
+            !test.date ||
+            !test.subject ||
+            !test.description
+        ) {
+
+            alert(
+                "Vul de datum, het vak en de omschrijving in."
+            );
+
+            return;
+        }
+
+
+        tests.push(test);
+
+        localStorage.setItem(
+            "schoolTests",
+            JSON.stringify(tests)
+        );
+
+
+        alert(
+            `Toets toegevoegd voor klas ${test.className}!`
+        );
+
+
+        document.getElementById(
+            "testSubject"
+        ).value = "";
+
+        document.getElementById(
+            "testDescription"
+        ).value = "";
+
+        document.getElementById(
+            "testTime"
+        ).value = "";
+
+
+        showTests();
+
+    });
+
+
+/* =========================
+   TOETSWEKEN
+========================= */
+
+const testClass =
+    document.getElementById(
+        "testClass"
     );
 
 
-    toonRooster();
+testClass.addEventListener(
+    "change",
+    showTests
+);
+
+
+function showTests() {
+
+    const container =
+        document.getElementById(
+            "tests"
+        );
+
+    container.innerHTML = "";
+
+
+    const filter =
+        testClass.value ||
+        selectedClass;
+
+
+    let visibleTests = tests;
+
+
+    if (filter) {
+
+        visibleTests =
+            tests.filter(
+                test =>
+                    test.className === filter
+            );
+
+    }
+
+
+    visibleTests.sort(
+        (a, b) =>
+            a.date.localeCompare(b.date)
+    );
+
+
+    if (visibleTests.length === 0) {
+
+        container.innerHTML = `
+            <div class="info-box">
+                Geen toetsen gevonden.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    visibleTests.forEach(test => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "test";
+
+        div.innerHTML = `
+            <h3>📝 ${test.subject}</h3>
+
+            <p>
+                📅 ${test.day}
+                ${formatDate(test.date)}
+            </p>
+
+            <p>
+                🕐 ${test.time || "Tijd nog niet bekend"}
+            </p>
+
+            <p>
+                🏫 Klas ${test.className}
+            </p>
+
+            <p>
+                📚 ${test.description}
+            </p>
+        `;
+
+        container.appendChild(div);
+
+    });
 
 }
+
+
+function formatDate(date) {
+
+    if (!date) return "";
+
+    const parts =
+        date.split("-");
+
+    return `${parts[2]}-${parts[1]}-${parts[0]}`;
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+showStudentSchedule();
+showTests();
